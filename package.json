@@ -1,0 +1,38 @@
+{
+  "name": "wc-mmd",
+  "version": "1.0.0",
+  "description": "A web component for rendering Mermaid diagrams in any environment (HTML, React, etc.)",
+  "main": "mermaid-chart.js",
+  "module": "mermaid-chart.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mermaid",
+    "web-component",
+    "lit",
+    "diagram",
+    "visualization",
+    "c4",
+    "flowchart",
+    "sequence-diagram",
+    "gantt"
+  ],
+  "author": "Sam",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samrocksc/wc-mermaid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samrocksc/wc-mermaid/issues"
+  },
+  "homepage": "https://github.com/samrocksc/wc-mermaid#readme",
+  "dependencies": {
+    "lit": "^3.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
