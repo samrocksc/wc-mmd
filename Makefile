@@ -1,4 +1,4 @@
-# Makefile for Mermaid Chart Web Component
+# Makefile for wc-mmd Web Component
 
 # Default target
 .PHONY: help
@@ -25,4 +25,4 @@ install:
 # Show npm package info
 .PHONY: info
 info:
-	npm info mermaid-chart-component
+	npm info wc-mmd
