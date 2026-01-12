@@ -25,10 +25,6 @@ export class MermaidChart extends LitElement {
       border-radius: 4px;
       background-color: #ffe6e6;
     }
-
-    slot {
-      display: none;
-    }
   `;
 
   constructor() {
@@ -61,27 +57,6 @@ export class MermaidChart extends LitElement {
     }
   }
 
-  firstUpdated() {
-    // Check for slotted content
-    const slot = this.shadowRoot.querySelector('slot');
-    const nodes = slot.assignedNodes();
-    if (nodes.length > 0) {
-      // Extract text content from slotted elements
-      const textContent = nodes.map(node => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          return node.textContent;
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          return node.textContent || '';
-        }
-        return '';
-      }).join('').trim();
-
-      if (textContent && !this.chart) {
-        this.chart = textContent;
-      }
-    }
-  }
-
   updated(changedProperties) {
     if (changedProperties.has('chart') || changedProperties.has('config')) {
       if (this.chart) {
@@ -95,7 +70,6 @@ export class MermaidChart extends LitElement {
       <div id="mermaid-container">
         <!-- Mermaid diagram will be rendered here -->
       </div>
-      <slot></slot>
     `;
   }
 }
