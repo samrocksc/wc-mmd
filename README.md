@@ -19,11 +19,23 @@ npm install wc-mmd
   <title>Mermaid Web Component Example</title>
 </head>
 <body>
+  <!-- Using the chart property -->
   <mermaid-chart></mermaid-chart>
+  
+  <!-- Using slots (alternative approach) -->
+  <mermaid-chart>
+    graph TD
+      A[Start] --> B{Is it?}
+      B -->|Yes| C[OK]
+      B -->|No| D[Not OK]
+      C --> E[End]
+      D --> E
+  </mermaid-chart>
   
   <script type="module">
     import 'wc-mmd/mermaid-chart.js';
     
+    // Only needed for the first chart
     const chart = document.querySelector('mermaid-chart');
     chart.chart = `
       graph TD
@@ -62,7 +74,18 @@ function App() {
   
   return (
     <div className="App">
+      {/* Using the chart property */}
       <mermaid-chart ref={chartRef}></mermaid-chart>
+      
+      {/* Using slots (alternative approach) */}
+      <mermaid-chart>
+        graph TD
+          A[Start] --> B{Is it?}
+          B -->|Yes| C[OK]
+          B -->|No| D[Not OK]
+          C --> E[End]
+          D --> E
+      </mermaid-chart>
     </div>
   );
 }
@@ -79,7 +102,18 @@ export default App;
   <title>Mermaid Web Component via Unpkg</title>
 </head>
 <body>
+  <!-- Using the chart property -->
   <mermaid-chart></mermaid-chart>
+  
+  <!-- Using slots (alternative approach) -->
+  <mermaid-chart>
+    graph TD
+      A[Start] --> B{Is it?}
+      B -->|Yes| C[OK]
+      B -->|No| D[Not OK]
+      C --> E[End]
+      D --> E
+  </mermaid-chart>
   
   <script type="module">
     import 'https://unpkg.com/wc-mmd/mermaid-chart.js';
@@ -112,6 +146,7 @@ chart.config = {
 
 ## C4 Diagram Example
 
+Using the chart property:
 ```javascript
 const chart = document.querySelector('mermaid-chart');
 chart.chart = `
@@ -127,12 +162,44 @@ chart.chart = `
 `;
 ```
 
+Using slots:
+```html
+<mermaid-chart>
+  C4Context
+    title System Context Diagram for Internet Banking System
+    Enterprise_Boundary(b0, "BankBoundary0") {
+      Person(customerA, "Banking Customer", "A customer of the bank, with personal bank accounts.")
+      System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+      SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+    }
+    Rel(customerA, SystemAA, "Uses")
+    Rel(SystemAA, SystemE, "Uses")
+</mermaid-chart>
+```
+
 ## Properties
 
 | Property | Type   | Description                          |
 |----------|--------|--------------------------------------|
 | chart    | string | The mermaid diagram definition       |
 | config   | object | Configuration options for mermaid.js |
+
+## Slots
+
+You can define your diagram directly in the HTML using the default slot:
+
+```html
+<mermaid-chart>
+  graph TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    B -->|No| D[Not OK]
+    C --> E[End]
+    D --> E
+</mermaid-chart>
+```
+
+The component will automatically extract the diagram definition from the slot content.
 
 ## Events
 

@@ -9,20 +9,67 @@
         <h1>Mermaid Chart Web Component Demo</h1>
 
         <!-- Example 1: Flowchart -->
-        <h2>Flowchart Example</h2>
+        <h2>Flowchart Example (using chart property)</h2>
         <mermaid-chart id="flowchart"></mermaid-chart>
 
+        <!-- Example 1b: Flowchart using slots -->
+        <h2>Flowchart Example (using slots)</h2>
+        <mermaid-chart>
+            graph TD A[Start] --> B{Is it?} B -->|Yes| C[OK] B -->|No| D[Not OK]
+            C --> E[End] D --> E
+        </mermaid-chart>
+
         <!-- Example 2: Sequence Diagram -->
-        <h2>Sequence Diagram Example</h2>
+        <h2>Sequence Diagram Example (using chart property)</h2>
         <mermaid-chart id="sequence"></mermaid-chart>
 
+        <!-- Example 2b: Sequence Diagram using slots -->
+        <h2>Sequence Diagram Example (using slots)</h2>
+        <mermaid-chart>
+            sequenceDiagram participant Alice participant Bob Alice->>John:
+            Hello John, how are you? loop Healthcheck John->>John: Fight against
+            hypochondria end Note right of John: Rational thoughts
+            <br />prevail! John-->>Alice: Great! John->>Bob: How about you?
+            Bob-->>John: Jolly good!
+        </mermaid-chart>
+
         <!-- Example 3: Configured Chart -->
-        <h2>Configured Chart Example</h2>
+        <h2>Configured Chart Example (using chart property)</h2>
         <mermaid-chart id="configured"></mermaid-chart>
 
+        <!-- Example 3b: Configured Chart using slots -->
+        <h2>Configured Chart Example (using slots)</h2>
+        <mermaid-chart>
+            graph LR A[Hard edge] -- Link text --> B(Round edge) B -->
+            C{Decision} C -->|One| D[Result one] C -->|Two| E[Result two]
+        </mermaid-chart>
+
         <!-- Example 4: C4 Diagram -->
-        <h2>C4 Diagram Example</h2>
+        <h2>C4 Diagram Example (using chart property)</h2>
         <mermaid-chart id="c4diagram"></mermaid-chart>
+
+        <!-- Example 4b: C4 Diagram using slots -->
+        <h2>C4 Diagram Example (using slots)</h2>
+        <mermaid-chart>
+            C4Context title System Context Diagram for Internet Banking System
+            Enterprise_Boundary(b0, "BankBoundary0") { Person(customerA,
+            "Banking Customer", "A customer of the bank, with personal bank
+            accounts.") Person(customerB, "Banking Customer", "A customer of the
+            bank, with personal bank accounts.") Person_Ext(customerC, "Banking
+            Customer", "A customer of the bank, with personal bank accounts.")
+            System(SystemAA, "Internet Banking System", "Allows customers to
+            view information about their bank accounts, and make payments.")
+            Enterprise_Boundary(b1, "BankBoundary1") { SystemDb_Ext(SystemE,
+            "Mainframe Banking System", "Stores all of the core banking
+            information about customers, accounts, transactions, etc.")
+            System_Ext(SystemF, "E-mail system", "The internal Microsoft
+            Exchange e-mail system.") } } Rel(customerA, SystemAA, "Uses")
+            Rel(SystemAA, SystemE, "Uses") Rel(customerB, SystemAA, "Uses")
+            Rel(customerC, SystemAA, "Uses") Rel(SystemE, SystemF, "Sends
+            e-mails", "SMTP") Rel(SystemF, customerA, "Sends e-mails to")
+            Rel(SystemF, customerB, "Sends e-mails to") Rel(SystemF, customerC,
+            "Sends e-mails to")
+        </mermaid-chart>
 
         <!-- Import the web component -->
         <script type="module">
@@ -34,39 +81,39 @@
                 // Set up the flowchart
                 const flowchart = document.getElementById("flowchart");
                 flowchart.chart = `
-        graph TD
-          A[Start] --> B{Is it?}
-          B -->|Yes| C[OK]
-          B -->|No| D[Not OK]
-          C --> E[End]
-          D --> E
-      `;
+graph TD
+  A[Start] --> B{Is it?}
+  B -->|Yes| C[OK]
+  B -->|No| D[Not OK]
+  C --> E[End]
+  D --> E
+`;
 
                 // Set up the sequence diagram
                 const sequence = document.getElementById("sequence");
                 sequence.chart = `
-        sequenceDiagram
-          participant Alice
-          participant Bob
-          Alice->>John: Hello John, how are you?
-          loop Healthcheck
-              John->>John: Fight against hypochondria
-          end
-          Note right of John: Rational thoughts <br/>prevail!
-          John-->>Alice: Great!
-          John->>Bob: How about you?
-          Bob-->>John: Jolly good!
-      `;
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+      John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+`;
 
                 // Set up a configured chart
                 const configured = document.getElementById("configured");
                 configured.chart = `
-        graph LR
-          A[Hard edge] -- Link text --> B(Round edge)
-          B --> C{Decision}
-          C -->|One| D[Result one]
-          C -->|Two| E[Result two]
-      `;
+graph LR
+  A[Hard edge] -- Link text --> B(Round edge)
+  B --> C{Decision}
+  C -->|One| D[Result one]
+  C -->|Two| E[Result two]
+`;
                 configured.config = {
                     theme: "forest",
                     securityLevel: "loose",
@@ -75,27 +122,27 @@
                 // Set up the C4 diagram
                 const c4Diagram = document.getElementById("c4diagram");
                 c4Diagram.chart = `
-        C4Context
-          title System Context Diagram for Internet Banking System
-          Enterprise_Boundary(b0, "BankBoundary0") {
-            Person(customerA, "Banking Customer", "A customer of the bank, with personal bank accounts.")
-            Person(customerB, "Banking Customer", "A customer of the bank, with personal bank accounts.")
-            Person_Ext(customerC, "Banking Customer", "A customer of the bank, with personal bank accounts.")
-            System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
-            Enterprise_Boundary(b1, "BankBoundary1") {
-              SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
-              System_Ext(SystemF, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-            }
-          }
-          Rel(customerA, SystemAA, "Uses")
-          Rel(SystemAA, SystemE, "Uses")
-          Rel(customerB, SystemAA, "Uses")
-          Rel(customerC, SystemAA, "Uses")
-          Rel(SystemE, SystemF, "Sends e-mails", "SMTP")
-          Rel(SystemF, customerA, "Sends e-mails to")
-          Rel(SystemF, customerB, "Sends e-mails to")
-          Rel(SystemF, customerC, "Sends e-mails to")
-      `;
+C4Context
+  title System Context Diagram for Internet Banking System
+  Enterprise_Boundary(b0, "BankBoundary0") {
+    Person(customerA, "Banking Customer", "A customer of the bank, with personal bank accounts.")
+    Person(customerB, "Banking Customer", "A customer of the bank, with personal bank accounts.")
+    Person_Ext(customerC, "Banking Customer", "A customer of the bank, with personal bank accounts.")
+    System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+    Enterprise_Boundary(b1, "BankBoundary1") {
+      SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+      System_Ext(SystemF, "E-mail system", "The internal Microsoft Exchange e-mail system.")
+    }
+  }
+  Rel(customerA, SystemAA, "Uses")
+  Rel(SystemAA, SystemE, "Uses")
+  Rel(customerB, SystemAA, "Uses")
+  Rel(customerC, SystemAA, "Uses")
+  Rel(SystemE, SystemF, "Sends e-mails", "SMTP")
+  Rel(SystemF, customerA, "Sends e-mails to")
+  Rel(SystemF, customerB, "Sends e-mails to")
+  Rel(SystemF, customerC, "Sends e-mails to")
+`;
             });
         </script>
     </body>
