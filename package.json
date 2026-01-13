@@ -1,5 +1,5 @@
 {
-  "name": "wc-mmd",
+  "name": "@samrocksc/wc-mmd",
   "version": "1.1.0",
   "description": "A web component for rendering Mermaid diagrams in any environment (HTML, React, etc.)",
   "main": "mermaid-chart.js",
@@ -33,6 +33,6 @@
     "lit": "^3.1.0"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   }
 }
